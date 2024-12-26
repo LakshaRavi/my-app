@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Draggable Calendar</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #external-events {
+            width: 300px;
+            margin: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .fc-event {
+            margin: 5px 0;
+            padding: 5px;
+            border-radius: 3px;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        #new-event-title {
+            width: calc(100% - 10px);
+            margin: 5px 0;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        select, button {
+            margin: 5px 0;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        #calendar-container {
+            width: 80%;
+            margin: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        #calendar {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="external-events">
+        <p><strong>Recommended Events</strong></p>
+        <div class="fc-event" data-event-title="Holiday" style="background-color: #ff5722;">Holiday</div>
+        <div class="fc-event" data-event-title="Exam" style="background-color: #3f51b5;">Exam</div>
+        <div class="fc-event" data-event-title="Event" style="background-color: #4caf50;">Event</div>
+        <div class="fc-event" data-event-title="Extra Class" style="background-color: #ffeb3b;">Extra Class</div>
+        <div class="fc-event" data-event-title="Assignment" style="background-color: #9c27b0;">Assignment</div>
+
+        <div>
+            <input type="text" id="new-event-title" placeholder="Enter Event Title">
+            <select id="event-type">
+                <option value="#ff5722">Holiday</option>
+                <option value="#3f51b5">Exam</option>
+                <option value="#4caf50">Event</option>
+                <option value="#ffeb3b">Extra Class</option>
+                <option value="#9c27b0">Assignment</option>
+            </select>
+            <button onclick="addEvent()">Add Event</button>
+        </div>
+    </div>
+
+    <div id="calendar-container">
+        <div id="calendar"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const Draggable = FullCalendar.Draggable;
+            const calendarEl = document.getElementById('calendar');
+            const externalEventsEl = document.getElementById('external-events');
+
+            new Draggable(externalEventsEl, {
+                itemSelector: '.fc-event',
+                eventData: function(eventEl) {
+                    return {
+                        title: eventEl.getAttribute('data-event-title'),
+                        backgroundColor: eventEl.style.backgroundColor
+                    };
+                }
+            });
+
+            const calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                editable: true,
+                droppable: true,
+                eventReceive: function(info) {
+                    console.log('Event dropped:', info.event);
+                }
+            });
+
+            calendar.render();
+        });
+
+        function addEvent() {
+            const title = document.getElementById('new-event-title').value;
+            const color = document.getElementById('event-type').value;
+
+            if (title.trim() === '') {
+                alert('Please enter an event title.');
+                return;
+            }
+
+            const newEvent = document.createElement('div');
+            newEvent.className = 'fc-event';
+            newEvent.textContent = title;
+            newEvent.style.backgroundColor = color;
+            newEvent.setAttribute('data-event-title', title);
+
+            document.getElementById('external-events').appendChild(newEvent);
+
+            new Draggable(newEvent.parentElement, {
+                itemSelector: '.fc-event',
+                eventData: function(eventEl) {
+                    return {
+                        title: eventEl.getAttribute('data-event-title'),
+                        backgroundColor: eventEl.style.backgroundColor
+                    };
+                }
+            });
+        }
+    </script>
+</body>
+</html>

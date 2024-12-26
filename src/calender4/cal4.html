@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assign Coordinators</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> <!-- For making HTTP requests -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            max-width: 500px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Assign Coordinators</h1>
+
+    <form id="assign-coordinators-form">
+        <label for="coordinator1-name">Coordinator 1 NAME:</label>
+        <input type="text" id="coordinator1-name" required>
+
+        <label for="coordinator1-usn">Coordinator 1 USN:</label>
+        <input type="text" id="coordinator1-usn" required>
+
+        <label for="coordinator2-name">Coordinator 2 NAME:</label>
+        <input type="text" id="coordinator2-name" required>
+
+        <label for="coordinator2-usn">Coordinator 2 USN:</label>
+        <input type="text" id="coordinator2-usn" required>
+
+        <button type="submit">Assign Coordinators</button>
+    </form>
+
+    <script>
+        // JavaScript to handle the form submission
+        document.getElementById('assign-coordinators-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            const coordinator1Name = document.getElementById('coordinator1-name').value.trim();
+            const coordinator1USN = document.getElementById('coordinator1-usn').value.trim();
+            const coordinator2Name = document.getElementById('coordinator2-name').value.trim();
+            const coordinator2USN = document.getElementById('coordinator2-usn').value.trim();
+
+            // Simple validation
+            if (!coordinator1Name || !coordinator1USN || !coordinator2Name || !coordinator2USN) {
+                alert('Please fill out all fields.');
+                return;
+            }
+
+            // Construct the data to send to the backend
+            const coordinatorData = [
+                { name: coordinator1Name, usn: coordinator1USN },
+                { name: coordinator2Name, usn: coordinator2USN }
+            ];
+
+            // Make an API call to the backend to assign coordinators
+            axios.post('http://localhost:8080/api/assignCoordinators', { coordinators: coordinatorData })
+                .then(response => {
+                    alert('Coordinators assigned successfully!');
+                    window.location.href = '../calender3/cal3.html';
+                })
+                .catch(error => {
+                    console.error('There was an error!', error);
+                    alert('Failed to assign coordinators. Please try again.');
+                });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+body {
+    background-color: antiquewhite;
+    font-family: Arial, sans-serif;
+}
+
+#teacher-dashboard, #coordinator-dashboard {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+input, select {
+    margin-bottom: 10px;
+    padding: 8px;
+    width: 200px;
+}
+
+button {
+    padding: 14px;
+    border-radius: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+
+}
+
+button:hover {
+    background-color: #45a049;
+}
