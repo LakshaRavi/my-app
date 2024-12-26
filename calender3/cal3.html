@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Draggable Calendar</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.css">
+    <link rel="stylesheet" href="cal3.css">
+</head>
+<body>
+    <div id="external-events">
+        <p><strong>Recommended Events</strong></p>
+        <div class="fc-event" data-event-title="Holiday" style="background-color: #ff5722;">Holiday</div>
+        <div class="fc-event" data-event-title="Exam" style="background-color: #3f51b5;">Exam</div>
+        <div class="fc-event" data-event-title="Event" style="background-color: #4caf50;">Event</div>
+        <div class="fc-event" data-event-title="Extra Class" style="background-color: #ffeb3b;">Extra Class</div>
+        <div class="fc-event" data-event-title="Assignment" style="background-color: #9c27b0;">Assignment</div>
+
+        <div>
+            <input type="text" id="new-event-title" placeholder="Enter Event Title">
+            <select id="event-type">
+                <option value="#ff5722">Holiday</option>
+                <option value="#3f51b5">Exam</option>
+                <option value="#4caf50">Event</option>
+                <option value="#ffeb3b">Extra Class</option>
+                <option value="#9c27b0">Assignment</option>
+            </select>
+            <button onclick="addEvent()">Add Event</button>
+        </div>
+    </div>
+
+    <div id="calendar-container">
+        <div id="calendar"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
+    <script src="cal3.js"></script>
+</body>
+</html>

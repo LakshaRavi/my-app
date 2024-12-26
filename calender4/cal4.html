@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assign Coordinators</title>
+    <link rel="stylesheet" href="cal4.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> <!-- For making HTTP requests -->
+</head>
+<body>
+    <h1>Assign Coordinators</h1>
+
+    <form id="assign-coordinators-form">
+        <label for="coordinator1-name">Coordinator 1 NAME:</label>
+        <input type="text" id="coordinator1-name" required><br><br>
+        <label for="coordinator1-usn">Coordinator 1 USN:  </label>
+        <input type="text" id="coordinator1-usn" required><br><br>
+
+        <label for="coordinator2-name">Coordinator 2 NAME:</label>
+        <input type="text" id="coordinator2-name" required><br><br>
+        <label for="coordinator2-usn">Coordinator 2 USN:  </label>
+        <input type="text" id="coordinator2-usn" required><br><br>
+
+        <button type="submit" >Assign Coordinators</button>
+    </form>
+
+    <script>
+        // JavaScript to handle the form submission
+        document.getElementById('assign-coordinators-form').addEventListener('submit', function(event) {
+            // event.preventDefault();
+
+            const coordinator1Name = document.getElementById('coordinator1-name').value.trim();
+            const coordinator1USN = document.getElementById('coordinator1-usn').value.trim();
+            const coordinator2Name = document.getElementById('coordinator2-name').value.trim();
+            const coordinator2USN = document.getElementById('coordinator2-usn').value.trim();
+           
+            // Simple validation
+            if (!coordinator1Name || !coordinator1USN || !coordinator2Name || !coordinator2USN) {
+                alert('Please fill out all fields.');
+                return;
+            }
+
+            // Construct the data to send to the backend
+            const coordinatorData = [
+                { name: coordinator1Name, usn: coordinator1USN },
+                { name: coordinator2Name, usn: coordinator2USN }
+            ];
+            window.location.href=('../calender3/cal3.html');alert('Coordinators assigned successfully!');
+            
+            // Make an API call to the backend to assign coordinators
+            axios.post('http://localhost:8080/api/assignCoordinators', { coordinators: coordinatorData })
+                .then(response => {
+                    window.location.href=('../calender3/cal3.html');
+                    alert('Coordinators assigned successfully!');
+                    // Optionally, reset the form
+                    document.getElementById('assign-coordinators-form').reset();
+                   
+                    
+                })
+                .catch(error => {
+                    console.error('There was an error!', error);
+                    alert('Failed to assign coordinators. Please try again.');
+                });
+                
+        });
+        
+    </script>
+</body>
+</html>

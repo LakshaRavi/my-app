@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Icons with Buttons</title>
+    <link rel="stylesheet" href="cal2.css"> <!-- Link to CSS file -->
+    <!-- Link to Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.css">
+    <link rel="stylesheet" href="../xyz.css">
+</head>
+<body>
+    <!-- Container for the Icons and Buttons -->
+    <div class="icon-container" id="icon-container">
+        <!-- Student Icon and Button -->
+        <div class="icon-box" id="studentIcon">
+            <i class="fas fa-user icon"></i> <!-- Font Awesome Person Icon -->
+            <button class="icon-button" onclick="openLoginForm('student')">Student</button>
+        </div>
+
+        <!-- Teacher Icon and Button -->
+        <div class="icon-box" id="teacherIcon">
+            <i class="fas fa-chalkboard-teacher icon"></i> <!-- Teacher Icon -->
+            <button class="icon-button" onclick="openLoginForm('teacher')">Teacher</button>
+        </div>
+
+        <!-- Club Icon and Button -->
+        <div class="icon-box" id="clubIcon">
+            <i class="fas fa-users icon"></i> <!-- Club Icon -->
+            <button class="icon-button" onclick="openLoginForm('club')">Club</button>
+        </div>
+    </div>
+
+    <!-- Login Forms for Each Type (Initially Hidden) -->
+    <div class="login-form" id="studentLoginForm">
+        <button class="close-btn" onclick="closeLoginForm()">×</button>
+        <h2>Student Login</h2>
+        <form onsubmit="loginUser('student'); return false;">
+            <label for="studentUsername">E-mail:</label>
+            <input type="text" id="studentUsername" placeholder="Enter E-mail" required>
+            <label for="studentPassword">Password:</label>
+            <input type="password" id="studentPassword" placeholder="Enter Password" required>
+            <button type="submit">Login</button>
+        </form>
+        <p><a href="javascript:void(0);" onclick="showSignUpForm('studentSignUpForm')">Don't have an account? Sign Up</a></p> <!-- Sign Up link -->
+    </div>
+
+    <div class="login-form" id="teacherLoginForm">
+        <button class="close-btn" onclick="closeLoginForm()">×</button>
+        <h2>Teacher Login</h2>
+        <form onsubmit="loginUser('teacher'); return false;">
+            <label for="teacherUsername">E-mail:</label>
+            <input type="text" id="teacherUsername" placeholder="Enter E-mail" required>
+            <label for="teacherPassword">Password:</label>
+            <input type="password" id="teacherPassword" placeholder="Enter Password" required>
+            <button type="submit">Login</button>
+        </form>
+        <p><a href="javascript:void(0);" onclick="showSignUpForm('teacherSignUpForm')">Don't have an account? Sign Up</a></p> <!-- Sign Up link -->
+    </div>
+
+    <div class="login-form" id="clubLoginForm">
+        <button class="close-btn" onclick="closeLoginForm()">×</button>
+        <h2>Club Login</h2>
+        <form onsubmit="loginUser('club'); return false;">
+            <label for="clubUsername">E-mail:</label>
+            <input type="text" id="clubUsername" placeholder="Enter E-mail" required>
+            <label for="clubPassword">Password:</label>
+            <input type="password" id="clubPassword" placeholder="Enter Password" required>
+            <button type="submit">Login</button>
+        </form>
+        <p><a href="javascript:void(0);" onclick="showSignUpForm('clubSignUpForm')">Want to create a club? Sign Up</a></p> <!-- Sign Up link -->
+    </div>
+
+    <!-- Sign-Up Forms -->
+    <div class="signup-form" id="studentSignUpForm" style="display: none;">
+        <button class="close-btn" onclick="closeSignUpForm()">×</button>
+        <h2>Student Sign Up</h2>
+        <form onsubmit="submitSignUp('student'); return false;">
+            <label for="studentEmail">College E-mail:</label>
+            <input type="email" id="studentEmail" placeholder="Enter College E-mail" required>
+            <label for="studentSignUpPassword">Password:</label>
+            <input type="password" id="studentSignUpPassword" placeholder="Enter Password" required>
+            <label for="studentUSN">USN:</label>
+            <input type="text" id="studentUSN" placeholder="Enter USN" required>
+            <label for="studentClass">Class and Section:</label>
+            <input type="text" id="studentClass" placeholder="Enter Class and Section" required>
+            <button type="submit">Sign Up</button>
+        </form>
+    </div>
+
+    <div class="signup-form" id="teacherSignUpForm" style="display: none;">
+        <button class="close-btn" onclick="closeSignUpForm()">×</button>
+        <h2>Teacher Sign Up</h2>
+        <form onsubmit="submitSignUp('teacher'); return false;">
+            <label for="teacherEmail">College E-mail:</label>
+            <input type="email" id="teacherEmail" placeholder="Enter College E-mail" required>
+            <label for="teacherSignUpPassword">Password:</label>
+            <input type="password" id="teacherSignUpPassword" placeholder="Enter Password" required>
+            <label for="teacherCollegeID">College ID:</label>
+            <input type="text" id="teacherCollegeID" placeholder="Enter College ID" required>
+            <label for="teacherDepartment">Department:</label>
+            <input type="text" id="teacherDepartment" placeholder="Enter Department" required>
+            <button type="submit">Sign Up</button>
+        </form>
+    </div>
+
+    <div class="signup-form" id="clubSignUpForm" style="display: none;">
+        <button class="close-btn" onclick="closeSignUpForm()">×</button>
+        <h2>Club Sign Up</h2>
+        <form onsubmit="submitSignUp('club'); return false;">
+            <label for="clubEmail">College E-mail:</label>
+            <input type="email" id="clubEmail" placeholder="Enter College E-mail" required>
+            <label for="clubSignUpPassword">Password:</label>
+            <input type="password" id="clubSignUpPassword" placeholder="Enter Password" required>
+            <label for="clubTeacherID">Teacher College ID:</label>
+            <input type="text" id="clubTeacherID" placeholder="Enter Teacher College ID" required>
+            <label for="clubDepartment">Department:</label>
+            <input type="text" id="clubDepartment" placeholder="Enter Department" required>
+            <button type="submit">Sign Up</button>
+        </form>
+    </div>
+
+<!-- Welcome Page -->
+    <div id="welcomePage" style="display: none;">
+        <div class="page-container">
+            <div class="left-container">
+                <i class="fas fa-home" onclick="goToCampusPage()">Campus</i>
+            </div>
+            
+            <div class="left-container2">
+                <i class="fas fa-users" onclick="goToClassPage()">Class</i>
+            </div>
+
+            <div class="right-container2">
+                <i class="fas fa-sign-out-alt logout-icon" onclick="goBackToHomePage()">Log out</i>
+            </div>
+        </div>
+        <div class="message-container">
+            <p>"Each day is a new opportunity to change your life."</p>
+        </div>
+        <!-- Calendar Section -->
+        <div class="calendar-container">
+            <div class="calendar">
+                <header class="calendar-header">
+                    <button class="prev-month" onclick="changeMonth(-1)">&#60;</button>
+                    <h2 id="calendar-month-year"></h2>
+                    <button class="next-month" onclick="changeMonth(1)">&#62;</button>
+                </header>
+                <table id="calendar-table">
+                    <thead>
+                        <tr>
+                            <th>Sun</th>
+                            <th>Mon</th>
+                            <th>Tue</th>
+                            <th>Wed</th>
+                            <th>Thu</th>
+                            <th>Fri</th>
+                            <th>Sat</th>
+                        </tr>
+                    </thead>
+                    <tbody id="calendar-body"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="campusPage" style="display: none;">
+        <div class="back-container">
+            <i class="fas fa-arrow-left" onclick="goBackToWelcomePage()">Back</i>
+        </div>
+        <h1>Welcome to Campus Page</h1>
+        <!-- FullCalendar and Event Handling -->
+        <div id="external-events">
+            <p><strong>Recommended Events</strong></p>
+            <div class="fc-event" data-event-title="Holiday" style="background-color: #ff5722;">Holiday</div>
+            <div class="fc-event" data-event-title="Exam" style="background-color: #3f51b5;">Exam</div>
+            <div class="fc-event" data-event-title="Event" style="background-color: #4caf50;">Event</div>
+            <div class="fc-event" data-event-title="Extra Class" style="background-color: #ffeb3b;">Extra Class</div>
+            <div class="fc-event" data-event-title="Assignment" style="background-color: #9c27b0;">Assignment</div>
+
+            <div>
+                <input type="text" id="new-event-title" placeholder="Enter Event Title">
+                <select id="event-type">
+                    <option value="#ff5722">Holiday</option>
+                    <option value="#3f51b5">Exam</option>
+                    <option value="#4caf50">Event</option>
+                    <option value="#ffeb3b">Extra Class</option>
+                    <option value="#9c27b0">Assignment</option>
+                </select>
+                <button onclick="addEvent()">Add Event</button>
+            </div>
+        </div>
+        <div id="calendar-container">
+            <div id="calendar"></div> <!-- Calendar container for FullCalendar -->
+        </div>
+    </div>
+
+    <!-- Class Page -->
+     <div id="classPage" ></div>
+    <div id="classPage" style="display: none;" onclik="window.location.replace('./cal3.html');">hello
+        <div class="back-container">
+            <i class="fas fa-arrow-left" onclick="goBackToWelcomePage()">Back</i>
+        </div>
+        <h1>Welcome to Class Page</h1>
+         <!-- FullCalendar and Event Handling  -->
+        <div id="external-events">
+            <p><strong>Recommended Events</strong></p>
+            <div class="fc-event" data-event-title="Holiday" style="background-color: #ff5722;">Holiday</div>
+            <div class="fc-event" data-event-title="Exam" style="background-color: #3f51b5;">Exam</div>
+            <div class="fc-event" data-event-title="Event" style="background-color: #4caf50;">Event</div>
+            <div class="fc-event" data-event-title="Extra Class" style="background-color: #ffeb3b;">Extra Class</div>
+            <div class="fc-event" data-event-title="Assignment" style="background-color: #9c27b0;">Assignment</div>
+
+            <div>
+                <input type="text" id="new-event-title" placeholder="Enter Event Title">
+                <select id="event-type">
+                    <option value="#ff5722">Holiday</option>
+                    <option value="#3f51b5">Exam</option>
+                    <option value="#4caf50">Event</option>
+                    <option value="#ffeb3b">Extra Class</option>
+                    <option value="#9c27b0">Assignment</option>
+                </select>
+                <button onclick="addEvent()">Add Event</button>
+            </div>
+        </div> 
+        <div id="calendar-container">
+            <div id="calendar"></div>  Calendar container for FullCalendar 
+        </div>
+    
+    </div>
+    <script src="cal2.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
+    <script>
+        // Initialize FullCalendar for Campus and Class Pages
+        // document.addEventListener('DOMContentLoaded', function() {
+        //     // Initialize FullCalendar for Campus Page
+        //     const campusCalendar = new FullCalendar.Calendar(document.getElementById('calendar'), {
+        //         initialView: 'dayGridMonth',
+        //         events: [
+        //             { title: 'Holiday', start: '2024-12-25', backgroundColor: '#ff5722' },
+        //             { title: 'Exam', start: '2024-12-28', backgroundColor: '#3f51b5' }
+        //         ]
+        //     });
+
+        //     campusCalendar.render();
+
+            // Initialize FullCalendar for Class Page (same logic as Campus Page)
+            // const classCalendar = new FullCalendar.Calendar(document.getElementById('calendar'), {
+            //     // initialView: 'dayGridMonth',
+            //     // events: [
+            //     //     { title: 'Holiday', start: '2024-12-25', backgroundColor: '#ff5722' },
+            //     //     { title: 'Exam', start: '2024-12-28', backgroundColor: '#3f51b5' }
+            //     // ]
+            // });
+
+            classCalendar.render();
+        // });
+    </script>
+</body>
+</html>

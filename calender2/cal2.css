@@ -1,0 +1,420 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+    font-size: 14px;
+  }
+  
+  #external-events {
+    position: fixed;
+    z-index: 2;
+    top: 20px;
+    bottom:10px;
+    left: 20px;
+    width: 160px;
+    padding: 0 10px;
+    border: 1px solid #ccc;
+    background: #eee;
+  }
+  
+  #external-events .fc-event {
+    cursor: move;
+    margin: 3px 3px;
+    margin-bottom: 5px;
+  }
+  
+  #calendar-container {
+    position: relative;
+    z-index: 1;
+    margin-left: 200px;
+  }
+  
+  #calendar {
+    max-width: 1100px;
+    margin: 20px auto;
+  }
+  input{
+    width:150px;
+  }
+
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #FFB6; /* Light Pink Background */
+}
+
+/* Page Containers (Ensure it's aligned vertically) */
+.page-container {
+    
+    position: fixed;  /* Fixed positioning */
+    top: 0;           /* Position it at the top of the viewport */
+    left: 0;          /* Position it at the left of the viewport */
+    width: 150px;     /* Set the width of the container */
+    background-color: #333;  /* Dark background color */
+    color: white;     /* Text color */
+    padding: 22px;    /* Padding inside the container */
+    z-index: 1000;    /* Ensure it's above other content */
+    height: 100vh;    /* Make it full height of the viewport */
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    gap: 20px;        /* Add space between items */
+    justify-content: flex-start; /* Align items to the top */
+}
+
+/* Left Containers Styling */
+.left-container, .left-container2 {
+    width: 100%;    /* Ensure it takes full width */
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.left-container i, .left-container2 i {
+    font-size: 26px;
+    color: #6e944d;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    display: flex;
+    justify-content: center; /* Center the icons */
+    align-items: center;
+}
+
+.left-container i:hover, .left-container2 i:hover {
+    color:  #4a5f28;
+}
+
+/* Logout Container */
+.right-container2 {
+    width: 100%;     /* Ensure it takes full width */
+    display: flex;
+    justify-content:center; /* Align logout icon to the right */
+    align-items: center;
+}
+
+.logout-icon {
+    font-size: 20px;
+    color: #808080;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.logout-icon:hover {
+    color: #c45353;
+}
+/* Back Button Container */
+.back-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    position: absolute; /* Use absolute positioning */
+    top: 10px; /* Distance from the top of the page */
+    left: 3px; /* Distance from the left of the page */
+    padding: 8px; /* Optional: Add some padding */
+}
+
+/* Styling for the Back Icon */
+.back-container i {
+    font-size: 20px;
+    color: #007b;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.back-container i:hover {
+    color: #0056b3;
+}
+
+/* Welcome Page Styling */
+#welcomePage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Full viewport height */
+    text-align: center; /* Center text alignment */
+}
+/* Welcome Heading Styling */
+#welcomePage h1 {
+    color: #333;
+    font-size: 3.5rem; /* Increase heading size */
+    margin: 0;
+}
+.message-container {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+    font-family: "Papyrus", fantasy;
+    font-weight: bold;
+    padding: 0px;
+    background-color: #f7f7f7;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transform: translate(10%,50%);
+}
+/* Centering and Styling for the Calendar */
+.calendar-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 50px; /* Adjust top margin as needed */
+}
+
+.calendar {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 600px;
+    text-align: center;
+    transform: translate(10%,3%);
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#calendar-month-year {
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+button {
+    background-color: #808080;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    padding: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #add8e6;
+}
+
+/* Calendar Table Styling */
+#calendar-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#calendar-table th, #calendar-table td {
+    padding: 20px;
+    text-align: center;
+    width: 14.28%; /* Ensure each cell takes up 1/7th of the width */
+}
+
+#calendar-table th {
+    background-color: #f0f0f0;
+    font-weight: bold;
+}
+
+#calendar-table td {
+    background-color: #f9f9f9;
+    cursor: pointer;
+}
+
+#calendar-table td:hover {
+    background-color: #add8e6;
+}
+
+#calendar-table td.empty {
+    background-color: transparent;
+    cursor: default;
+}
+
+
+/* Styling for the Campus and Class Pages */
+#campusPage, #classPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    font-size: 12px;
+    font-family: "Papyrus", fantasy;
+     top: 0; /* Move to the horizontal center */
+    transform: translateX(-190%);
+    position:fixed;
+}
+
+/* Styling for Icons and Buttons in Icon Container */
+.icon-container {
+    display: flex;
+    justify-content: space-around;
+    width: 80%;
+    margin-bottom: 20px;
+}
+
+/* Styling for each Icon Box */
+.icon-box {
+    text-align: center;
+    padding: 16px;
+}
+
+/* Icon Styling */
+.icon {
+    font-size: 50px; /* Size of the icon */
+    color: black; /* Color of the icon (black) */
+    margin-bottom: 10px;
+    padding: 10px;/* Space between icon and button */
+}
+
+/* Button Styling */
+.icon-button {
+    padding: 8px 12px;
+    font-size: 26px;
+    background-color: #808080; /* Gray background for buttons */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: "Papyrus", fantasy;
+}
+
+.icon-button:hover {
+    background-color: #add8e6;
+}
+
+/* Form Styling */
+.login-form, .signup-form {
+    display: none;
+    text-align: center;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Styling for the Form Heading */
+h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Label and Input Styling */
+label,
+input {
+    width: 80%; /* Full width for the input fields */
+    margin: 5px 0;
+    text-align: left;
+}
+
+input {
+    padding: 14px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 15px;
+    background-color: #808080;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #add8e6;
+}
+
+/* Close Button Styling */
+.close-btn {
+    font-size: 24px;
+    color: #888;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.close-btn:hover {
+    color: #000;
+}
+/* Styling for the Campus and Class Pages */
+#campusPage, #classPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    font-size: 12px;
+    font-family: "Papyrus", fantasy;
+    top: 0; /* Move to the horizontal center */
+    position: absolute; /* Use absolute positioning to ensure they’re visible */
+    left: 50%; /* Position at the center horizontally */
+    transform: translateX(-50%); /* Correct horizontal centering */
+    width: 100%; /* Ensure it takes up full width */
+    z-index: 10; 
+    font-family:Arial, sans-serif;/* Make sure the page is above the background */
+}
+/* Ensure full width and height for the calendar container */
+#calendar-container {
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+/* Make the calendar take full width and adjust to container */
+#calendar {
+    width: 100%;
+    height: 500px; /* Default height */
+    max-width: 100%; /* Ensure calendar does not overflow horizontally */
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    #calendar {
+        height: 400px; /* Adjust height for tablets */
+    }
+}
+
+/* Even smaller screens (smartphones in portrait mode) */
+@media (max-width: 480px) {
+    #calendar {
+        height: 300px; /* Adjust height for smartphones */
+    }
+    #calendar-container {
+        padding: 10px; /* Reduce padding on smaller screens */
+    }
+}
+
+/* Additional styles to handle FullCalendar's default classes */
+.fc {
+    font-size: 14px; /* Adjust font size for mobile-friendly view */
+}
+
+.fc .fc-toolbar-title {
+    font-size: 18px; /* Adjust toolbar title size */
+}
+
+.fc-daygrid-day-number {
+    font-size: 12px; /* Adjust day number size for better readability */
+}
